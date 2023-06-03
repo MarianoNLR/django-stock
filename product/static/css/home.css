@@ -1,0 +1,60 @@
+.container-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.container-filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    height: 70px;
+}
+
+.container-filters input {
+    padding: 5px;
+    font-family: sans-serif;
+    flex: 1;
+}
+
+.container-filters select {
+    padding: 5px;
+    font-family: sans-serif;
+    flex: 1;
+}
+
+.form-filter {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.products-table {
+    width: 100%;
+}
+
+.table-item {
+    font-weight: 700;
+    font-size: large;
+}
+
+td,th {
+    border: 1px solid rgb(190, 190, 190);
+}
+
+td{
+    text-align: center;
+}
+
+.not-found {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

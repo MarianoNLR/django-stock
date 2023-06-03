@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<div class="container">
+    <div class="container-filters">
+        <form method="POST" class="form-filter">
+            {% csrf_token %}
+            {{form.product_name }}
+            {{form.category}} 
+            <button type="submit">Search</button>
+        </form>
+    </div>
+        <table class="products-table" id="table">
+            <thead>
+                <tr>
+                    <th colspan="5">Products Stock</th>
+                </tr>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody class="products" id="table-content">
+                {% for product in products %}
+                <tr>
+                    
+                    <td class="table-item" id="product-item">{{product.name}}</td>
+                    
+                    <td class="table-item" id="brand-item">{{product.brand}}</td>
+                    
+                    <td class="table-item" id="quantity-item">{{product.quantity}}</td>
+
+                    <td class="table-item">{{product.category}}</td>
+                    
+                    <td class="table-item">$ {{product.price}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+{% block js %}
+
+{% endblock %}
+
+{% endblock %}

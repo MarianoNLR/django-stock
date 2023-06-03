@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<div class="container-content">
+    <div class="container-filters">
+        <form method="POST" class="form-filter">
+            {% csrf_token %}
+            {{form.product_name }}
+            {{form.category}}
+            <!-- <input name="product-name"type="text" id="name-filter" placeholder="Product Name" class="input-name">
+            <p id="log"></p>
+            <select name="category" id="category-filter" class="select-category">
+                <option value="" selected>Category</option>
+                {% for category in categories %}
+                <option value="{{category.name}}">{{category.name}}</option>
+                {% endfor %}
+            </select> -->
+            <button type="submit">Search</button>
+            <button type="submit" formaction="{% url 'home' %}">Volver</button>
+        </form>
+    </div>
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th colspan="4">Products Stock</th>
+                </tr>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody class="products">
+                {% for product in products %}
+                <tr>
+                    
+                    <td class="table-item">{{product.name}}</td>
+                    
+                    <td class="table-item">{{product.brand}}</td>
+                    
+                    <td class="table-item">{{product.quantity}}</td>
+                    
+                    <td class="table-item">$ {{product.price}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if products %}
+        {% else %}
+        <div class="not-found">
+            <h2>No se encontraron coincidencias</h2>
+        </div>
+        {% endif %}
+</div>
+
+{% block js %}
+<!-- <script>
+    const productName = document.querySelector('#name-filter')
+    const productCategory = document.querySelector('#category-filter')
+    productName.addEventListener("input", nameFilter)
+    productCategory.addEventListener("change", categoryFilter)
+    var list_products = '{{products_json | safe}}';
+    
+    function nameFilter(e) {
+        console.log(JSON.parse(list_products))
+        for (const p of JSON.parse(list_products)) {
+            console.log(p['fields']['name'])
+        }
+    }
+
+    function categoryFilter(e) {
+        
+    }
+</script> -->
+{% endblock %}
+
+{% endblock %}
