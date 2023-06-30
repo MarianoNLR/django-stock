@@ -1,4 +1,6 @@
 .container-content {
+    background: aliceblue;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,21 +12,26 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
+    gap: 20px;
     height: 70px;
 }
 
 .container-filters input {
     padding: 5px;
     font-family: sans-serif;
-    flex: 1;
+    width: 20rem;
 }
 
 .container-filters select {
-    padding: 5px;
+    padding: 8px;
     font-family: sans-serif;
-    flex: 1;
+    width: 20rem;
+}
+
+.container-filters .btn-group {
+    gap: 10px;
 }
 
 .form-filter {

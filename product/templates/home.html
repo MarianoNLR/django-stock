@@ -1,27 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
-<div class="container">
+<div class="container-content">
     <div class="container-filters">
-        <form method="POST" class="form-filter">
-            {% csrf_token %}
-            {{form.product_name }}
-            {{form.category}} 
-            <button type="submit">Search</button>
-        </form>
+        
+        <input type="text" id="name-filter" placeholder="Product Name">
+        <select name="select" id="category-filter">
+            <option value="" selected>Category</option>
+            <option value="alimentos">Alimentos</option>
+            <option value="higiene">Higiene</option>
+            </select>
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary" onclick="tableFilter()">Search</button>
+                <button type="button" class="btn btn-secondary" onclick="clearFilter()">Clear</button>
+            </div>
+        
+        
     </div>
-        <table class="products-table" id="table">
+        <table class="table table-striped products-table" id="table" style="width:100%">
+            
             <thead>
                 <tr>
-                    <th colspan="5">Products Stock</th>
+                    <th colspan="5" class="text-center">Products Stock</th>
                 </tr>
                 <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Brand</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Price</th>
+                    <th scope="col" class="text-center">Product Name</th>
+                    <th scope="col" class="text-center">Brand</th>
+                    <th scope="col" class="text-center">Stock</th>
+                    <th scope="col" class="text-center">Category</th>
+                    <th scope="col" class="text-center">Price</th>
                 </tr>
             </thead>
             <tbody class="products" id="table-content">
@@ -44,7 +57,44 @@
 </div>
 
 {% block js %}
+<script>
+    function tableFilter() {
+        var inputName = document.getElementById('name-filter').value.toLowerCase();
+        var inputCategory = document.getElementById('category-filter').value.toLowerCase();
 
+        var table = document.getElementById('table');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 2; i < rows.length; i++) { // Comenzamos en 1 para omitir la fila de encabezado
+            var name = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+            var category = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
+            
+            if (name.includes(inputName) && category.includes(inputCategory)) {
+            rows[i].style.display = '';
+            } else {
+            rows[i].style.display = 'none';
+            }
+        }
+}
+
+function clearFilter() {
+    var inputName = document.getElementById('name-filter').value = "";
+    var inputCategory = document.getElementById('category-filter').value = "";
+
+    tableFilter()
+}
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    });
+
+    $.extend( $.fn.dataTable.defaults, {
+    searching: false,
+    lengthChange: false
+} );
+</script>
 {% endblock %}
 
 {% endblock %}

@@ -1,7 +1,7 @@
 body{
     font-family: sans-serif;
     background-color: aliceblue;
-    margin: auto;
+    margin: 0 auto !important;
     max-width: 80%;
 }
 
@@ -22,7 +22,7 @@ body{
     align-items: center;
 }
 
-.header-list{
+.list{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
